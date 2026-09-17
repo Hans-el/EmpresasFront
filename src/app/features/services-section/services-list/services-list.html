@@ -1,61 +1,68 @@
-<div class="min-h-screen bg-[#0B0B0A] text-white">
+<div class="min-h-screen bg-brand-dark text-brand-text">
     @if (loading()) {
-    <!-- LOADING -->
+    <!-- LOADING-->
     <section class="max-w-7xl mx-auto px-6 lg:px-12 py-32">
         <div class="animate-pulse">
-            <div class="h-3 w-32 bg-white/10 rounded"></div>
+            <div class="h-3 w-32 bg-brand-border rounded"></div>
 
-            <div class="h-14 w-96 max-w-full bg-white/10 rounded mt-6"></div>
+            <div class="h-14 w-96 max-w-full bg-brand-border rounded mt-6"></div>
 
-            <div class="h-4 w-full max-w-2xl bg-white/10 rounded mt-8"></div>
+            <div class="h-4 w-full max-w-2xl bg-brand-border rounded mt-8"></div>
         </div>
     </section>
     } @else {
-    <!-- HEADER -->
+    <!--  HEADER
+              -->
     <section class="relative overflow-hidden">
         <!-- Decorative glow -->
-        <div class="absolute -top-48 -right-40 w-125 h-125 rounded-full bg-[#B89B5E]/10 blur-3xl"></div>
+        <div class="absolute -top-48 -right-40 w-125 h-125 rounded-full bg-brand-gold/10 blur-3xl" aria-hidden="true">
+        </div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-24 pb-20 lg:pt-32 lg:pb-24">
             <div class="max-w-4xl">
-                <span class="text-[#B89B5E] text-xs tracking-[0.35em] uppercase"> Lo que hacemos </span>
+                <!-- Eyebrow -->
+                <span class="text-brand-gold text-xs tracking-[0.35em] uppercase"> Lo que hacemos </span>
 
-                <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mt-6">
+                <!-- Title -->
+                <h1 class="font-brand-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mt-6">
                     Nuestros
 
-                    <span class="text-[#B89B5E] italic"> Servicios </span>
+                    <span class="text-brand-gold italic"> Servicios </span>
                 </h1>
 
-                <div class="mt-8 w-20 h-px bg-[#B89B5E]"></div>
+                <!-- Accent -->
+                <div class="brand-line mt-8"></div>
 
-                <p class="mt-8 text-white/55 text-lg md:text-xl leading-relaxed max-w-2xl">
+                <!-- Description -->
+                <p class="mt-8 text-brand-muted text-lg md:text-xl leading-relaxed max-w-2xl">
                     Soluciones diseñadas con precisión, experiencia y atención a cada detalle.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES -->
-    <section class="border-t border-white/10">
+    <!--   SERVICES
+              -->
+    <section class="border-t border-brand">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             @if (services().length === 0) {
             <!-- EMPTY STATE -->
             <div class="py-32 text-center">
-                <span class="text-[#B89B5E] text-xs tracking-[0.3em] uppercase"> Servicios </span>
+                <span class="text-brand-gold text-xs tracking-[0.3em] uppercase"> Servicios </span>
 
-                <h2 class="font-serif text-3xl md:text-4xl mt-5 text-white/80">Próximamente</h2>
+                <h2 class="font-brand-serif text-3xl md:text-4xl mt-5 text-brand-text">Próximamente</h2>
 
-                <p class="text-white/40 mt-4">Estamos preparando nuestros servicios.</p>
+                <p class="text-brand-subtle mt-4">Estamos preparando nuestros servicios.</p>
             </div>
             } @else {
             <div>
                 @for (service of services(); track service.id) {
-                <article
-                    class="group border-b border-white/10 py-12 lg:py-16 transition-all duration-500 hover:px-4 lg:hover:px-6">
+                <!-- SERVICE -->
+                <article class="group brand-row py-12 lg:py-16 transition-all duration-500 hover:px-4 lg:hover:px-6">
                     <div class="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
                         <!-- NUMBER -->
                         <div class="lg:col-span-1">
-                            <span class="text-[#B89B5E] text-xs tracking-[0.2em]">
+                            <span class="brand-number">
                                 {{ ($index + 1).toString().padStart(2, '0') }}
                             </span>
                         </div>
@@ -63,14 +70,14 @@
                         <!-- SERVICE NAME -->
                         <div class="lg:col-span-5">
                             <h2
-                                class="font-serif text-3xl md:text-4xl lg:text-5xl text-white group-hover:text-[#B89B5E] transition-colors duration-500">
+                                class="font-brand-serif text-3xl md:text-4xl lg:text-5xl text-brand-text group-hover:text-brand-gold transition-colors duration-500">
                                 {{ service.name }}
                             </h2>
                         </div>
 
                         <!-- DESCRIPTION -->
                         <div class="lg:col-span-5 lg:pt-2">
-                            <p class="text-white/50 text-base md:text-lg leading-relaxed">
+                            <p class="text-brand-muted text-base md:text-lg leading-relaxed">
                                 {{ service.description }}
                             </p>
                         </div>
@@ -78,9 +85,9 @@
                         <!-- ARROW -->
                         <div class="lg:col-span-1 flex lg:justify-end lg:pt-2">
                             <div
-                                class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#B89B5E] group-hover:bg-[#B89B5E] transition-all duration-500">
-                                <svg class="w-4 h-4 text-white group-hover:text-[#0B0B0A] group-hover:translate-x-0.5 transition-all duration-500"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                class="w-10 h-10 rounded-full border border-brand-strong flex items-center justify-center group-hover:border-brand-gold group-hover:bg-brand-gold transition-all duration-500">
+                                <svg class="w-4 h-4 text-brand-text group-hover:text-brand-dark group-hover:translate-x-0.5 transition-all duration-500"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                         d="M5 12h14M13 6l6 6-6 6" />
                                 </svg>
@@ -95,22 +102,27 @@
     </section>
 
     <!-- BOTTOM CTA -->
-    <section class="border-t border-white/10">
+    <section class="border-t border-brand">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 py-24 lg:py-32 text-center">
-            <div class="w-px h-14 bg-[#B89B5E] mx-auto mb-8"></div>
+            <!-- Accent -->
+            <div class="w-px h-14 bg-brand-gold mx-auto mb-8" aria-hidden="true"></div>
 
-            <p class="text-[#B89B5E] text-xs tracking-[0.3em] uppercase">¿Tienes un proyecto?</p>
+            <!-- Eyebrow -->
+            <p class="text-brand-gold text-xs tracking-[0.3em] uppercase">¿Tienes un proyecto?</p>
 
-            <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl mt-5">
+            <!-- CTA Title -->
+            <h2 class="font-brand-serif text-3xl md:text-4xl lg:text-5xl mt-5">
                 Hablemos de lo que
-                <span class="italic text-white/50"> necesitas. </span>
+
+                <span class="italic text-brand-muted"> necesitas. </span>
             </h2>
 
-            <a routerLink="/contacto"
-                class="inline-flex items-center gap-5 mt-10 px-8 py-4 border border-[#B89B5E] text-[#B89B5E] text-xs tracking-[0.25em] uppercase hover:bg-[#B89B5E] hover:text-[#0B0B0A] transition-all duration-300">
+            <!-- CTA -->
+            <a routerLink="/contacto" class="brand-button mt-10 px-8 py-4">
                 Contactarnos
 
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
             </a>

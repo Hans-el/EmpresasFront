@@ -1,0 +1,105 @@
+<nav class="sticky top-0 z-50 bg-brand-dark/95 backdrop-blur-md border-b border-brand">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <!-- HEADER -->
+        <div class="flex items-center justify-between h-20">
+            <!-- LOGO -->
+            <a routerLink="/" class="group flex items-center gap-3" aria-label="Manabaware - Inicio">
+                <!-- Logo mark -->
+                <div
+                    class="w-8 h-8 border border-brand-gold flex items-center justify-center transition-transform duration-500 group-hover:rotate-45">
+                    <span class="text-brand-gold text-xs font-brand-serif -rotate-45"> M </span>
+                </div>
+
+                <!-- Brand -->
+                <span class="font-brand-serif text-xl tracking-wide text-brand-text"> Manabaware </span>
+            </a>
+
+            <!-- DESKTOP MENU -->
+            <div class="hidden md:flex items-center gap-10">
+                <!-- SOBRE NOSOTROS -->
+                <a routerLink="/sobre-nosotros" routerLinkActive="text-brand-gold"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    class="relative py-2 text-xs tracking-[0.18em] uppercase text-brand-muted hover:text-brand-text transition-colors duration-300 group">
+                    Sobre Nosotros
+
+                    <span
+                        class="absolute left-0 bottom-0 w-0 h-px bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <!-- SERVICIOS -->
+                <a routerLink="/servicios" routerLinkActive="text-brand-gold"
+                    class="relative py-2 text-xs tracking-[0.18em] uppercase text-brand-muted hover:text-brand-text transition-colors duration-300 group">
+                    Servicios
+
+                    <span
+                        class="absolute left-0 bottom-0 w-0 h-px bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <!-- EMPLEOS -->
+                <a routerLink="/empleos" routerLinkActive="text-brand-gold"
+                    class="relative py-2 text-xs tracking-[0.18em] uppercase text-brand-muted hover:text-brand-text transition-colors duration-300 group">
+                    Empleos
+
+                    <span
+                        class="absolute left-0 bottom-0 w-0 h-px bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <!-- CONTACT CTA -->
+                <a routerLink="/contacto"
+                    class="ml-2 px-5 py-2.5 border border-brand-gold/70 text-brand-gold text-xs tracking-[0.2em] uppercase hover:bg-brand-gold hover:text-brand-dark transition-all duration-300">
+                    Contacto
+                </a>
+            </div>
+
+            <!-- MOBILE BUTTON -->
+            <button type="button" (click)="toggleMenu()" [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'"
+                [attr.aria-expanded]="menuOpen()"
+                class="md:hidden w-10 h-10 flex items-center justify-center border border-brand text-brand-muted hover:border-brand-gold hover:text-brand-gold transition-colors duration-300">
+                @if (menuOpen()) {
+                <!-- CLOSE -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6l12 12M6 18L18 6" />
+                </svg>
+                } @else {
+                <!-- MENU -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M4 7h16M4 12h16M4 17h16" />
+                </svg>
+                }
+            </button>
+        </div>
+
+        <!-- MOBILE MENU -->
+        @if (menuOpen()) {
+        <div class="md:hidden border-t border-brand py-6">
+            <div class="flex flex-col">
+                <!-- SOBRE NOSOTROS -->
+                <a routerLink="/sobre-nosotros" routerLinkActive="text-brand-gold"
+                    [routerLinkActiveOptions]="{ exact: true }" (click)="toggleMenu()"
+                    class="py-4 text-sm tracking-[0.15em] uppercase text-brand-muted border-b border-brand hover:text-brand-gold transition-colors duration-300">
+                    Sobre Nosotros
+                </a>
+
+                <!-- SERVICIOS -->
+                <a routerLink="/servicios" routerLinkActive="text-brand-gold" (click)="toggleMenu()"
+                    class="py-4 text-sm tracking-[0.15em] uppercase text-brand-muted border-b border-brand hover:text-brand-gold transition-colors duration-300">
+                    Servicios
+                </a>
+
+                <!-- EMPLEOS -->
+                <a routerLink="/empleos" routerLinkActive="text-brand-gold" (click)="toggleMenu()"
+                    class="py-4 text-sm tracking-[0.15em] uppercase text-brand-muted border-b border-brand hover:text-brand-gold transition-colors duration-300">
+                    Empleos
+                </a>
+
+                <!-- CONTACT -->
+                <a routerLink="/contacto" (click)="toggleMenu()"
+                    class="mt-5 py-3 border border-brand-gold text-center text-brand-gold text-xs tracking-[0.2em] uppercase hover:bg-brand-gold hover:text-brand-dark transition-all duration-300">
+                    Contacto
+                </a>
+            </div>
+        </div>
+        }
+    </div>
+</nav>
