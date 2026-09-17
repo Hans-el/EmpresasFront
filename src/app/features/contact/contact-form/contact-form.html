@@ -1,0 +1,170 @@
+<div class="min-h-screen bg-[#0B0B0A] text-white">
+    @if (submitted()) {
+    <!-- SUCCESS STATE -->
+    <section class="min-h-[70vh] flex items-center justify-center px-6">
+        <div class="text-center max-w-xl">
+            <div
+                class="mx-auto w-16 h-16 rounded-full border border-[#B89B5E]/40 flex items-center justify-center mb-8">
+                <svg class="w-7 h-7 text-[#B89B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+
+            <span class="text-[#B89B5E] text-xs tracking-[0.3em] uppercase"> Mensaje recibido </span>
+
+            <h1 class="font-serif text-4xl md:text-5xl mt-5">
+                Gracias por
+                <span class="text-[#B89B5E] italic"> contactarnos. </span>
+            </h1>
+
+            <p class="text-white/50 mt-6 leading-relaxed">
+                Hemos recibido tu mensaje correctamente. Nuestro equipo se pondrá en contacto contigo
+                próximamente.
+            </p>
+        </div>
+    </section>
+    } @else {
+    <!-- HEADER -->
+    <section class="relative overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-[#B89B5E]/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-24 pb-16">
+            <div class="max-w-3xl">
+                <span class="text-[#B89B5E] text-xs tracking-[0.35em] uppercase">
+                    Estamos para escucharte
+                </span>
+
+                <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mt-6">
+                    Hablemos
+
+                    <span class="text-[#B89B5E] italic"> juntos. </span>
+                </h1>
+
+                <div class="mt-8 w-20 h-px bg-[#B89B5E]"></div>
+
+                <p class="mt-8 text-white/55 text-lg md:text-xl leading-relaxed max-w-2xl">
+                    Si tienes alguna consulta, propuesta o simplemente deseas conocer más sobre nosotros,
+                    estaremos encantados de escucharte.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT CONTENT -->
+    <section class="border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-16 lg:gap-24">
+                <!-- INFORMATION -->
+                <div class="lg:col-span-4">
+                    <span class="text-[#B89B5E] text-xs tracking-[0.3em] uppercase"> Contacto </span>
+
+                    <h2 class="font-serif text-3xl lg:text-4xl mt-5 leading-tight">
+                        Cuéntanos
+                        <br />
+                        <span class="text-white/50 italic"> lo que necesitas. </span>
+                    </h2>
+
+                    <div class="mt-10 space-y-8">
+                        <div>
+                            <p class="text-[10px] tracking-[0.25em] uppercase text-[#B89B5E]">Atención</p>
+
+                            <p class="text-white/60 mt-2">
+                                Nuestro equipo está disponible para atender tus consultas.
+                            </p>
+                        </div>
+
+                        <div class="w-full h-px bg-white/10"></div>
+
+                        <div>
+                            <p class="text-[10px] tracking-[0.25em] uppercase text-[#B89B5E]">Respuesta</p>
+
+                            <p class="text-white/60 mt-2">
+                                Nos pondremos en contacto contigo lo antes posible.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FORM -->
+                <div class="lg:col-span-8">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-10">
+                        <!-- NAME -->
+                        <div>
+                            <label class="block text-xs tracking-[0.2em] uppercase text-white/50 mb-3">
+                                Nombre completo
+                            </label>
+
+                            <input formControlName="fullName" type="text" placeholder="Tu nombre"
+                                class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-4 text-white placeholder:text-white/25 focus:border-[#B89B5E] focus:ring-0 transition duration-300" />
+
+                            @if (form.get('fullName')?.invalid && form.get('fullName')?.touched) {
+                            <p class="text-red-400 text-xs mt-2">El nombre es obligatorio.</p>
+                            }
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div>
+                            <label class="block text-xs tracking-[0.2em] uppercase text-white/50 mb-3">
+                                Email
+                            </label>
+
+                            <input formControlName="email" type="email" placeholder="tu@email.com"
+                                class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-4 text-white placeholder:text-white/25 focus:border-[#B89B5E] focus:ring-0 transition duration-300" />
+
+                            @if (form.get('email')?.invalid && form.get('email')?.touched) {
+                            <p class="text-red-400 text-xs mt-2">Ingresa un email válido.</p>
+                            }
+                        </div>
+
+                        <!-- SUBJECT -->
+                        <div>
+                            <label class="block text-xs tracking-[0.2em] uppercase text-white/50 mb-3">
+                                Asunto
+                            </label>
+
+                            <input formControlName="subject" type="text" placeholder="¿En qué podemos ayudarte?"
+                                class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-4 text-white placeholder:text-white/25 focus:border-[#B89B5E] focus:ring-0 transition duration-300" />
+                        </div>
+
+                        <!-- MESSAGE -->
+                        <div>
+                            <label class="block text-xs tracking-[0.2em] uppercase text-white/50 mb-3">
+                                Mensaje
+                            </label>
+
+                            <textarea formControlName="message" rows="5" placeholder="Escribe tu mensaje..."
+                                class="w-full bg-transparent border-0 border-b border-white/20 px-0 py-4 resize-none text-white placeholder:text-white/25 focus:border-[#B89B5E] focus:ring-0 transition duration-300">
+                </textarea>
+                        </div>
+
+                        <!-- SUBMIT -->
+                        <div class="pt-2">
+                            <button type="submit"
+                                class="group inline-flex items-center gap-5 px-8 py-4 border border-[#B89B5E] text-[#B89B5E] text-xs tracking-[0.25em] uppercase hover:bg-[#B89B5E] hover:text-[#0B0B0A] transition-all duration-300">
+                                Enviar mensaje
+
+                                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M5 12h14M13 6l6 6-6 6" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTTOM STATEMENT -->
+    <section class="border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-20 text-center">
+            <div class="w-px h-14 bg-[#B89B5E] mx-auto mb-7"></div>
+
+            <p class="font-serif italic text-2xl md:text-3xl text-white/70">
+                Cada conversación es el comienzo de algo extraordinario.
+            </p>
+        </div>
+    </section>
+    }
+</div>
