@@ -1,0 +1,79 @@
+<div class="min-h-screen bg-brand-dark text-brand-text">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-12 lg:py-16">
+        <!-- Cabecera -->
+        <header class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
+            <div>
+                <span class="text-brand-gold text-[10px] tracking-[0.35em] uppercase"> Manabaware </span>
+
+                <h1 class="font-brand-serif text-4xl md:text-5xl lg:text-6xl mt-4">
+                    Panel de
+                    <span class="text-brand-gold italic">Administración</span>
+                </h1>
+
+                <div class="brand-line mt-6"></div>
+            </div>
+
+            <button type="button" (click)="logout()"
+                class="text-xs tracking-[0.18em] uppercase text-brand-muted hover:text-danger transition-colors duration-300">
+                Cerrar sesión
+            </button>
+        </header>
+
+        <!-- Navegación del panel -->
+        <nav class="border-y border-brand" aria-label="Secciones de administración">
+            <div class="flex items-center gap-8 md:gap-12 overflow-x-auto">
+                <!-- Servicios -->
+                <button type="button" (click)="setTab('services')"
+                    class="relative py-5 text-xs tracking-[0.18em] uppercase whitespace-nowrap transition-colors duration-300"
+                    [class.text-brand-gold]="activeTab() === 'services'"
+                    [class.text-brand-muted]="activeTab() !== 'services'">
+                    Servicios
+
+                    @if (activeTab() === 'services') {
+                    <span class="absolute left-0 right-0 bottom-0 h-px bg-brand-gold"></span>
+                    }
+                </button>
+
+                <!-- Empleos -->
+                <button type="button" (click)="setTab('jobs')"
+                    class="relative py-5 text-xs tracking-[0.18em] uppercase whitespace-nowrap transition-colors duration-300"
+                    [class.text-brand-gold]="activeTab() === 'jobs'" [class.text-brand-muted]="activeTab() !== 'jobs'">
+                    Empleos
+
+                    @if (activeTab() === 'jobs') {
+                    <span class="absolute left-0 right-0 bottom-0 h-px bg-brand-gold"></span>
+                    }
+                </button>
+
+                <!-- Mensajes -->
+                <button type="button" (click)="setTab('messages')"
+                    class="relative py-5 text-xs tracking-[0.18em] uppercase whitespace-nowrap transition-colors duration-300"
+                    [class.text-brand-gold]="activeTab() === 'messages'"
+                    [class.text-brand-muted]="activeTab() !== 'messages'">
+                    Mensajes
+
+                    @if (activeTab() === 'messages') {
+                    <span class="absolute left-0 right-0 bottom-0 h-px bg-brand-gold"></span>
+                    }
+                </button>
+            </div>
+        </nav>
+
+        <!-- Contenido -->
+        <main class="pt-12 lg:pt-16">
+            @switch (activeTab()) {
+            @case ('services') {
+            <app-services-admin />
+            }
+
+            @case ('jobs') {
+            <app-jobs-admin />
+            }
+
+            @case ('messages') {
+            <app-messages-admin />
+            }
+            }
+        </main>
+    </div>
+</div>

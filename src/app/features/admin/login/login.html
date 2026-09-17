@@ -1,0 +1,67 @@
+<div class="min-h-[calc(100vh-5rem)] bg-brand-dark text-brand-text flex items-center justify-center px-6 py-20">
+    <div class="w-full max-w-md">
+        <!-- Encabezado -->
+        <div class="text-center mb-12">
+            <div class="w-10 h-10 border border-brand-gold mx-auto flex items-center justify-center mb-8">
+                <span class="text-brand-gold font-brand-serif text-sm"> M </span>
+            </div>
+
+            <span class="text-brand-gold text-[10px] tracking-[0.35em] uppercase"> Área privada </span>
+
+            <h1 class="font-brand-serif text-4xl md:text-5xl mt-4">
+                Acceso
+                <span class="text-brand-gold italic">Administrador</span>
+            </h1>
+
+            <div class="brand-line mx-auto mt-6"></div>
+
+            <p class="text-brand-muted text-sm mt-6">
+                Introduce tus credenciales para acceder al panel administrativo.
+            </p>
+        </div>
+
+        <!-- Formulario -->
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-8">
+            <!-- Usuario -->
+            <div>
+                <label for="username" class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
+                    Usuario
+                </label>
+
+                <input id="username" formControlName="username" type="text" autocomplete="username" class="brand-input"
+                    placeholder="Introduce tu usuario" />
+            </div>
+
+            <!-- Contraseña -->
+            <div>
+                <label for="password" class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
+                    Contraseña
+                </label>
+
+                <input id="password" formControlName="password" type="password" autocomplete="current-password"
+                    class="brand-input" placeholder="Introduce tu contraseña" />
+            </div>
+
+            <!-- Error -->
+            @if (errorMessage()) {
+            <div class="border border-danger/40 bg-danger/5 px-4 py-3">
+                <p class="text-danger text-sm">
+                    {{ errorMessage() }}
+                </p>
+            </div>
+            }
+
+            <!-- Botón -->
+            <button type="submit" class="brand-button-solid w-full">Ingresar</button>
+        </form>
+
+        <!-- Pie -->
+        <div class="flex items-center gap-4 mt-10">
+            <div class="brand-divider"></div>
+            <span class="text-brand-subtle text-[9px] tracking-[0.25em] uppercase whitespace-nowrap">
+                Acceso restringido
+            </span>
+            <div class="brand-divider"></div>
+        </div>
+    </div>
+</div>

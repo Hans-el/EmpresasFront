@@ -1,0 +1,103 @@
+<div class="min-h-screen bg-brand-dark text-brand-text">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-20">
+        <!-- Encabezado -->
+        <div class="mb-16">
+            <span class="text-brand-gold text-[10px] tracking-[0.35em] uppercase">
+                Panel administrativo
+            </span>
+
+            <h1 class="font-brand-serif text-4xl md:text-5xl lg:text-6xl mt-4">
+                Mensajes de
+                <span class="text-brand-gold italic">Contacto</span>
+            </h1>
+
+            <div class="brand-line mt-6"></div>
+
+            <p class="text-brand-muted mt-6 max-w-xl leading-relaxed">
+                Consulta y gestiona los mensajes recibidos a través del formulario de contacto.
+            </p>
+        </div>
+
+        <!-- Lista de mensajes -->
+        <section>
+            <div class="flex items-center gap-5 mb-2">
+                <span class="text-brand-gold text-[10px] tracking-[0.3em] uppercase">
+                    Bandeja de entrada
+                </span>
+
+                <div class="brand-divider"></div>
+            </div>
+
+            @for (msg of messages(); track msg.id) {
+            <article class="group brand-row py-8 lg:py-10" [class.border-brand-gold]="!msg.read">
+                <div class="grid lg:grid-cols-12 gap-6 lg:gap-10">
+                    <!-- Número / estado -->
+                    <div class="lg:col-span-1">
+                        <span class="brand-number">
+                            {{ ($index + 1).toString().padStart(2, '0') }}
+                        </span>
+
+                        @if (!msg.read) {
+                        <span class="block w-1.5 h-1.5 rounded-full bg-brand-gold mt-4"></span>
+                        }
+                    </div>
+
+                    <!-- Información -->
+                    <div class="lg:col-span-8">
+                        <div class="flex flex-wrap items-center gap-3">
+                            <h2
+                                class="font-brand-serif text-2xl md:text-3xl text-brand-text group-hover:text-brand-gold transition-colors duration-300">
+                                {{ msg.fullName }}
+                            </h2>
+
+                            @if (!msg.read) {
+                            <span class="brand-badge border-brand-gold/50 text-brand-gold"> Nuevo </span>
+                            }
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-3 text-sm text-brand-subtle">
+                            <span>{{ msg.email }}</span>
+                            <span class="text-brand-gold">·</span>
+                            <span>{{ msg.subject }}</span>
+                        </div>
+
+                        <p class="text-brand-muted mt-6 leading-relaxed max-w-3xl">
+                            {{ msg.message }}
+                        </p>
+                    </div>
+
+                    <!-- Acción -->
+                    <div class="lg:col-span-3 flex lg:justify-end lg:items-start">
+                        @if (!msg.read) {
+                        <button type="button" (click)="markAsRead(msg.id)"
+                            class="inline-flex items-center gap-3 text-xs tracking-[0.15em] uppercase text-brand-muted hover:text-brand-gold transition-colors duration-300 group/action">
+                            Marcar como leído
+
+                            <svg class="w-4 h-4 group-hover/action:translate-x-1 transition-transform duration-300"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M5 12h14M13 6l6 6-6 6" />
+                            </svg>
+                        </button>
+                        } @else {
+                        <span class="text-[10px] tracking-[0.2em] uppercase text-brand-subtle">
+                            Leído
+                        </span>
+                        }
+                    </div>
+                </div>
+            </article>
+            } @empty {
+            <div class="py-28 text-center border-b border-brand">
+                <span class="brand-number"> 00 </span>
+
+                <h2 class="font-brand-serif text-2xl md:text-3xl mt-4">No hay mensajes todavía</h2>
+
+                <p class="text-brand-subtle mt-4 max-w-md mx-auto leading-relaxed">
+                    Los mensajes enviados desde el formulario de contacto aparecerán aquí.
+                </p>
+            </div>
+            }
+        </section>
+    </div>
+</div>
