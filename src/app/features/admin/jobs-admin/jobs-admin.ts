@@ -15,6 +15,7 @@ export class JobsAdmin implements OnInit {
   jobOffers = signal<JobOffer[]>([]);
   editingId = signal<number | null>(null);
   showForm = signal(false);
+  saving = signal(false);
 
   form = this.fb.group({
     title: ['', Validators.required],
@@ -51,15 +52,20 @@ export class JobsAdmin implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.invalid) return;
+    if (this.form.invalid || this.saving()) return;
+    this.saving.set(true);
     const dto = this.form.getRawValue() as JobOfferRequest;
     const id = this.editingId();
 
     const request$ = id ? this.jobOfferService.update(id, dto) : this.jobOfferService.create(dto);
 
-    request$.subscribe(() => {
-      this.showForm.set(false);
-      this.loadJobs();
+    request$.subscribe({
+      next: () => {
+        this.saving.set(false);
+        this.showForm.set(false);
+        this.loadJobs();
+      },
+      error: () => this.saving.set(false),
     });
   }
 

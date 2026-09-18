@@ -1,80 +1,202 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="brand-card p-6 md:p-8 lg:p-10">
-    <!-- Encabezado -->
-    <div class="flex items-start justify-between gap-6 mb-10">
-        <div>
-            <span class="brand-number">
-                {{ editingId() ? 'EDITAR' : 'NUEVA' }}
-            </span>
+<div class="min-h-screen bg-brand-dark text-brand-text">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-20">
+        <!-- Encabezado -->
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+            <div>
+                <span class="text-brand-gold text-[10px] tracking-[0.35em] uppercase">
+                    Panel administrativo
+                </span>
 
-            <h3 class="font-brand-serif text-2xl md:text-3xl mt-3">
-                {{ editingId() ? 'Editar' : 'Nueva' }} Oferta
-            </h3>
+                <h2 class="font-brand-serif text-4xl md:text-5xl lg:text-6xl mt-4">
+                    Gestión de
+                    <span class="text-brand-gold italic">Empleos</span>
+                </h2>
 
-            <div class="brand-line mt-5"></div>
+                <div class="brand-line mt-6"></div>
+
+                <p class="text-brand-muted mt-6 max-w-xl leading-relaxed">
+                    Administra las oportunidades profesionales disponibles en Manabaware.
+                </p>
+            </div>
+
+            <button type="button" (click)="openCreateForm()" class="brand-button-solid shrink-0">
+                <span class="text-base leading-none">+</span>
+                Nueva Oferta
+            </button>
         </div>
 
-        <button type="button" (click)="cancel()"
-            class="w-9 h-9 border border-brand text-brand-muted hover:border-brand-gold hover:text-brand-gold transition-colors duration-300"
-            aria-label="Cerrar formulario">
-            <svg class="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6l12 12M6 18L18 6" />
-            </svg>
-        </button>
+        <!-- Formulario -->
+        @if (showForm()) {
+        <section class="brand-card p-6 md:p-8 lg:p-10 mb-16">
+            <div class="flex items-start justify-between gap-6 mb-10">
+                <div>
+                    <span class="brand-number">
+                        {{ editingId() ? 'EDITAR' : 'NUEVA' }}
+                    </span>
+
+                    <h3 class="font-brand-serif text-2xl md:text-3xl mt-3">
+                        {{ editingId() ? 'Editar' : 'Nueva' }} Oferta
+                    </h3>
+
+                    <div class="brand-line mt-5"></div>
+                </div>
+
+                <button type="button" (click)="cancel()"
+                    class="w-9 h-9 border border-brand text-brand-muted hover:border-brand-gold hover:text-brand-gold transition-colors duration-300"
+                    aria-label="Cerrar formulario">
+                    <svg class="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M6 6l12 12M6 18L18 6" />
+                    </svg>
+                </button>
+            </div>
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-8">
+                <!-- Título -->
+                <div>
+                    <label for="job-title" class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
+                        Título
+                    </label>
+
+                    <input id="job-title" formControlName="title" type="text" placeholder="Título de la oferta"
+                        class="brand-input" />
+                </div>
+
+                <!-- Descripción -->
+                <div>
+                    <label for="job-description"
+                        class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
+                        Descripción
+                    </label>
+
+                    <textarea id="job-description" formControlName="description"
+                        placeholder="Describe la posición y sus responsabilidades" rows="5"
+                        class="brand-textarea"></textarea>
+                </div>
+
+                <!-- Ubicación -->
+                <div>
+                    <label for="job-location"
+                        class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
+                        Ubicación
+                    </label>
+
+                    <input id="job-location" formControlName="location" type="text"
+                        placeholder="Ciudad, país o ubicación remota" class="brand-input" />
+                </div>
+
+                <!-- Modalidad -->
+                <div>
+                    <label for="job-modality"
+                        class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
+                        Modalidad
+                    </label>
+
+                    <select id="job-modality" formControlName="modality"
+                        class="w-full py-3 border-0 border-b border-brand bg-transparent text-brand-text outline-none focus:border-brand-gold transition-colors duration-200">
+                        <option value="REMOTO" class="bg-brand-dark">Remoto</option>
+
+                        <option value="HIBRIDO" class="bg-brand-dark">Híbrido</option>
+
+                        <option value="PRESENCIAL" class="bg-brand-dark">Presencial</option>
+                    </select>
+                </div>
+
+                <!-- Acciones -->
+                <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-brand">
+                    <button type="submit" [disabled]="saving()"
+                        class="brand-button-solid disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-brand-gold">
+                        @if (saving()) {
+                        Guardando...
+                        } @else {
+                        Guardar
+                        }
+                    </button>
+
+                    <button type="button" (click)="cancel()" [disabled]="saving()"
+                        class="brand-button disabled:opacity-40 disabled:cursor-not-allowed">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </section>
+        }
+
+        <!-- Lista de ofertas -->
+        <section>
+            <div class="flex items-center gap-5 mb-2">
+                <span class="text-brand-gold text-[10px] tracking-[0.3em] uppercase">
+                    Ofertas registradas
+                </span>
+
+                <div class="brand-divider"></div>
+            </div>
+
+            @for (job of jobOffers(); track job.id) {
+            <article class="brand-row group py-8 lg:py-10">
+                <div class="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+                    <!-- Número -->
+                    <div class="lg:col-span-1">
+                        <span class="brand-number">
+                            {{ ($index + 1).toString().padStart(2, '0') }}
+                        </span>
+                    </div>
+
+                    <!-- Información -->
+                    <div class="lg:col-span-7">
+                        <h3
+                            class="font-brand-serif text-2xl md:text-3xl text-brand-text group-hover:text-brand-gold transition-colors duration-300">
+                            {{ job.title }}
+                        </h3>
+
+                        <div class="flex flex-wrap items-center gap-x-3 gap-y-2 mt-3 text-sm text-brand-subtle">
+                            <span>
+                                {{ job.location }}
+                            </span>
+
+                            <span class="text-brand-gold"> · </span>
+
+                            <span>
+                                {{ job.modality }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Modalidad -->
+                    <div class="lg:col-span-2">
+                        <span class="brand-badge">
+                            {{ job.modality }}
+                        </span>
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="lg:col-span-2 flex lg:justify-end gap-6">
+                        <button type="button" (click)="openEditForm(job)"
+                            class="text-xs tracking-[0.15em] uppercase text-brand-muted hover:text-brand-gold transition-colors duration-300">
+                            Editar
+                        </button>
+
+                        <button type="button" (click)="onDelete(job.id)"
+                            class="text-xs tracking-[0.15em] uppercase text-danger hover:text-danger/80 transition-colors duration-300">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
+            </article>
+            } @empty {
+            <div class="py-28 text-center border-b border-brand">
+                <span class="brand-number"> 00 </span>
+
+                <h3 class="font-brand-serif text-2xl md:text-3xl mt-4">
+                    No hay ofertas de empleo todavía
+                </h3>
+
+                <p class="text-brand-subtle mt-4 max-w-md mx-auto leading-relaxed">
+                    Crea una nueva oferta para comenzar a publicar oportunidades profesionales.
+                </p>
+            </div>
+            }
+        </section>
     </div>
-
-    <!-- Campos -->
-    <div class="space-y-8">
-        <!-- Título -->
-        <div>
-            <label for="job-title" class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
-                Título
-            </label>
-
-            <input id="job-title" formControlName="title" type="text" placeholder="Título de la oferta"
-                class="brand-input" />
-        </div>
-
-        <!-- Descripción -->
-        <div>
-            <label for="job-description" class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
-                Descripción
-            </label>
-
-            <textarea id="job-description" formControlName="description"
-                placeholder="Describe la posición y sus responsabilidades" rows="5" class="brand-textarea"></textarea>
-        </div>
-
-        <!-- Ubicación -->
-        <div>
-            <label for="job-location" class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
-                Ubicación
-            </label>
-
-            <input id="job-location" formControlName="location" type="text"
-                placeholder="Ciudad, país o ubicación remota" class="brand-input" />
-        </div>
-
-        <!-- Modalidad -->
-        <div>
-            <label for="job-modality" class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
-                Modalidad
-            </label>
-
-            <select id="job-modality" formControlName="modality"
-                class="w-full py-3 border-0 border-b border-brand bg-transparent text-brand-text outline-none focus:border-brand-gold transition-colors duration-200">
-                <option value="REMOTO" class="bg-brand-dark">Remoto</option>
-
-                <option value="HIBRIDO" class="bg-brand-dark">Híbrido</option>
-
-                <option value="PRESENCIAL" class="bg-brand-dark">Presencial</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Acciones -->
-    <div class="flex flex-col sm:flex-row gap-3 mt-10 pt-6 border-t border-brand">
-        <button type="submit" class="brand-button-solid">Guardar</button>
-
-        <button type="button" (click)="cancel()" class="brand-button">Cancelar</button>
-    </div>
-</form>
+</div>
