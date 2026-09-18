@@ -1,0 +1,129 @@
+<div class="min-h-screen bg-brand-dark text-brand-text">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-20">
+        <!-- ENCABEZADO -->
+        <div class="mb-16">
+            <span class="text-brand-gold text-[10px] tracking-[0.35em] uppercase">
+                Panel administrativo
+            </span>
+            <h1 class="font-brand-serif text-4xl md:text-5xl lg:text-6xl mt-4">
+                Gestión de
+                <span class="text-brand-gold italic">Postulantes</span>
+            </h1>
+            <div class="brand-line mt-6"></div>
+            <p class="text-brand-muted mt-6 max-w-xl leading-relaxed">
+                Consulta los candidatos que han enviado su postulación a las diferentes oportunidades
+                profesionales.
+            </p>
+        </div>
+
+        <!-- SELECTOR DE OFERTA -->
+        <section class="brand-card p-6 md:p-8 lg:p-10 mb-16">
+            <div class="max-w-2xl">
+                <span class="brand-number"> OFERTAS </span>
+                <h2 class="font-brand-serif text-2xl md:text-3xl mt-3">Selecciona una oferta</h2>
+                <div class="brand-line mt-5"></div>
+                <label for="job-offer" class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mt-8 mb-3">
+                    Oferta de empleo
+                </label>
+
+                <select id="job-offer" (change)="onSelectJobOffer($event)"
+                    class="w-full py-3 border-0 border-b border-brand bg-transparent text-brand-text outline-none focus:border-brand-gold transition-colors duration-200">
+                    <option value="" class="bg-brand-dark">-- Selecciona una oferta --</option>
+
+                    @for (job of jobOffers(); track job.id) {
+                    <option [value]="job.id" class="bg-brand-dark">
+                        {{ job.title }}
+                    </option>
+                    }
+                </select>
+            </div>
+        </section>
+
+        <!-- RESULTADOS -->
+        @if (loading()) {
+        <!-- LOADING -->
+        <section>
+            <div class="flex items-center gap-5 mb-2">
+                <span class="text-brand-gold text-[10px] tracking-[0.3em] uppercase"> Postulantes </span>
+                <div class="brand-divider"></div>
+            </div>
+
+            <div class="py-20">
+                <div class="animate-pulse space-y-6 max-w-3xl">
+                    <div class="h-3 w-32 bg-brand-dark-light rounded"></div>
+                    <div class="h-8 w-72 bg-brand-dark-light rounded"></div>
+                    <div class="h-4 w-full bg-brand-dark-light rounded"></div>
+                    <div class="h-4 w-5/6 bg-brand-dark-light rounded"></div>
+                </div>
+
+                <p class="text-brand-subtle text-sm mt-8">Cargando postulantes...</p>
+            </div>
+        </section>
+        } @else if (selectedJobOfferId() !== null) {
+        <section>
+            <!-- CABECERA DE RESULTADOS -->
+            <div class="flex items-center gap-5 mb-2">
+                <span class="text-brand-gold text-[10px] tracking-[0.3em] uppercase">
+                    Candidatos registrados
+                </span>
+
+                <div class="brand-divider"></div>
+            </div>
+
+            @if (applications().length === 0) {
+            <!-- EMPTY STATE -->
+            <div class="py-28 text-center border-b border-brand">
+                <span class="brand-number"> 00 </span>
+                <h2 class="font-brand-serif text-2xl md:text-3xl mt-4">Aún no hay postulantes</h2>
+                <div class="brand-line mx-auto mt-6"></div>
+                <p class="text-brand-subtle mt-5 max-w-md mx-auto leading-relaxed">
+                    No se han recibido postulaciones para esta oferta de empleo.
+                </p>
+            </div>
+            } @else {
+            <!-- LISTA DE POSTULANTES -->
+            <div>
+                @for (app of applications(); track app.id) {
+                <article class="brand-row group py-8 lg:py-10">
+                    <div class="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+                        <!-- NÚMERO -->
+                        <div class="lg:col-span-1">
+                            <span class="brand-number">
+                                {{ ($index + 1).toString().padStart(2, '0') }}
+                            </span>
+                        </div>
+
+                        <!-- INFORMACIÓN -->
+                        <div class="lg:col-span-8">
+                            <h3
+                                class="font-brand-serif text-2xl md:text-3xl text-brand-text group-hover:text-brand-gold transition-colors duration-300">
+                                {{ app.applicantName }}
+                            </h3>
+
+                            <p class="text-brand-muted text-sm mt-3">
+                                {{ app.applicantEmail }}
+                            </p>
+                        </div>
+
+                        <!-- CV -->
+                        <div class="lg:col-span-3 flex lg:justify-end">
+                            <a [href]="app.resumeUrl" target="_blank" rel="noopener noreferrer"
+                                class="brand-button group/cv">
+                                Ver CV
+
+                                <svg class="w-4 h-4 transition-transform duration-300 group-hover/cv:translate-x-1"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M5 12h14M13 6l6 6-6 6" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                }
+            </div>
+            }
+        </section>
+        }
+    </div>
+</div>

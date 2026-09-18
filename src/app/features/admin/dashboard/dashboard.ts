@@ -2,15 +2,16 @@ import { Component, signal } from '@angular/core';
 import { ServicesAdmin } from '../services-admin/services-admin';
 import { JobsAdmin } from '../jobs-admin/jobs-admin';
 import { MessagesAdmin } from '../messages-admin/messages-admin';
+import { ApplicationsAdmin } from '../applications-admin/applications-admin';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 
-type Tab = 'services' | 'jobs' | 'messages';
+type Tab = 'services' | 'jobs' | 'messages' | 'applications';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ServicesAdmin, JobsAdmin, MessagesAdmin],
+  imports: [ServicesAdmin, JobsAdmin, MessagesAdmin, ApplicationsAdmin],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {

@@ -1,16 +1,18 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { JobOfferService } from '../../../core/services/job-offer.service';
 import { JobOffer, JobModality } from '../../../core/models/job-offer.model';
+import { ApplyModal } from '../apply-modal/apply-modal';
 
 @Component({
   selector: 'app-jobs-list',
   standalone: true,
-  imports: [],
+  imports: [ApplyModal],
   templateUrl: './jobs-list.html',
 })
 export class JobsList implements OnInit {
   jobOffers = signal<JobOffer[]>([]);
   loading = signal(true);
+  selectedJob = signal<JobOffer | null>(null);
 
   constructor(private jobOfferService: JobOfferService) {}
 
@@ -22,6 +24,13 @@ export class JobsList implements OnInit {
       },
       error: () => this.loading.set(false),
     });
+  }
+  openApplyModal(job: JobOffer): void {
+    this.selectedJob.set(job);
+  }
+
+  closeApplyModal(): void {
+    this.selectedJob.set(null);
   }
 
   modalityLabel(modality: JobModality): string {
@@ -37,7 +46,7 @@ export class JobsList implements OnInit {
     const colors: Record<JobModality, string> = {
       REMOTO: 'bg-green-100 text-green-700',
       HIBRIDO: 'bg-yellow-100 text-yellow-700',
-      PRESENCIAL: 'bg-blue-100 text-blue-700',
+      PRESENCIAL: 'bg-dark-100 text-blue-700',
     };
     return colors[modality];
   }

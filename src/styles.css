@@ -9,8 +9,7 @@
   /* -----------------------------------------------------
        BRAND COLORS
        Cambiar estos valores modifica la identidad global
-       ----------------------------------------------------- */
-
+       ---------------------------------------------------- */
   --color-brand-dark: #0b0b0a;
   --color-brand-dark-soft: #11110f;
   --color-brand-dark-light: #181816;
@@ -18,51 +17,39 @@
   --color-brand-gold: #b89b5e;
   --color-brand-gold-light: #d4bc87;
   --color-brand-gold-dark: #92783f;
-
   /* -----------------------------------------------------
        TEXT
        ----------------------------------------------------- */
-
   --color-brand-text: #ffffff;
   --color-brand-text-muted: rgba(255, 255, 255, 0.6);
   --color-brand-text-subtle: rgba(255, 255, 255, 0.4);
-
   /* -----------------------------------------------------
        BORDERS
        ----------------------------------------------------- */
-
   --color-brand-border: rgba(255, 255, 255, 0.1);
   --color-brand-border-strong: rgba(255, 255, 255, 0.2);
-
   /* -----------------------------------------------------
        STATUS
        ----------------------------------------------------- */
-
   --color-success: #6faf72;
   --color-warning: #c9a34e;
   --color-danger: #c96a6a;
   --color-info: #6c91b8;
-
   /* -----------------------------------------------------
        TYPOGRAPHY
        ----------------------------------------------------- */
-
   --font-sans: 'Instrument Sans', sans-serif;
   --font-serif: Georgia, 'Times New Roman', serif;
-
   /* -----------------------------------------------------
        BORDER RADIUS
        Diseño premium: radios discretos
        ----------------------------------------------------- */
-
   --radius-brand-sm: 0.25rem;
   --radius-brand-md: 0.5rem;
   --radius-brand-lg: 0.75rem;
-
   /* -----------------------------------------------------
        SHADOWS
        ----------------------------------------------------- */
-
   --shadow-brand-sm: 0 4px 20px rgba(0, 0, 0, 0.2);
   --shadow-brand-md: 0 10px 40px rgba(0, 0, 0, 0.3);
   --shadow-brand-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
@@ -209,20 +196,15 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-
   padding: 0.75rem 1.5rem;
-
   border: 1px solid var(--color-brand-gold);
   border-radius: var(--radius-brand-sm);
-
   background-color: transparent;
   color: var(--color-brand-gold);
-
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-
   transition:
     background-color 200ms ease,
     color 200ms ease,
@@ -248,20 +230,15 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-
   padding: 0.75rem 1.5rem;
-
   border: 1px solid var(--color-brand-gold);
   border-radius: var(--radius-brand-sm);
-
   background-color: var(--color-brand-gold);
   color: var(--color-brand-dark);
-
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-
   transition:
     background-color 200ms ease,
     border-color 200ms ease,
@@ -283,17 +260,12 @@ body {
 
 .brand-input {
   width: 100%;
-
   padding: 0.75rem 0;
-
   border: 0;
   border-bottom: 1px solid var(--color-brand-border);
-
   background-color: transparent;
   color: var(--color-brand-text);
-
   outline: none;
-
   transition: border-color 200ms ease;
 }
 
@@ -311,20 +283,14 @@ body {
 
 .brand-textarea {
   width: 100%;
-
   min-height: 120px;
-
   padding: 0.75rem 0;
-
   border: 0;
   border-bottom: 1px solid var(--color-brand-border);
-
   background-color: transparent;
   color: var(--color-brand-text);
-
   outline: none;
   resize: vertical;
-
   transition: border-color 200ms ease;
 }
 
@@ -343,7 +309,6 @@ body {
 .brand-card {
   background-color: var(--color-brand-dark-soft);
   border: 1px solid var(--color-brand-border);
-
   transition:
     border-color 250ms ease,
     transform 250ms ease,
@@ -363,7 +328,6 @@ body {
 
 .brand-row {
   border-bottom: 1px solid var(--color-brand-border);
-
   transition:
     border-color 250ms ease,
     padding-left 250ms ease;
@@ -381,7 +345,6 @@ body {
 
 .brand-number {
   color: var(--color-brand-gold);
-
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.15em;
@@ -394,14 +357,10 @@ body {
 .brand-badge {
   display: inline-flex;
   align-items: center;
-
   padding: 0.35rem 0.75rem;
-
   border: 1px solid var(--color-brand-border);
   border-radius: 999px;
-
   color: var(--color-brand-text-muted);
-
   font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -425,10 +384,8 @@ body {
 .brand-container {
   width: 100%;
   max-width: 1200px;
-
   margin-left: auto;
   margin-right: auto;
-
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
@@ -448,10 +405,8 @@ body {
 
 .brand-hero {
   min-height: 70vh;
-
   display: flex;
   align-items: center;
-
   background-color: var(--color-brand-dark);
 }
 

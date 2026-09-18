@@ -2,60 +2,47 @@
     @if (loading()) {
     <!-- LOADING -->
     <section class="max-w-7xl mx-auto px-6 lg:px-12 py-32">
-        <div class="animate-pulse space-y-6">
-            <div class="h-3 w-32 bg-brand-border rounded"></div>
-
-            <div class="h-14 w-96 max-w-full bg-brand-border rounded"></div>
-
-            <div class="h-4 w-full max-w-2xl bg-brand-border rounded"></div>
+        <div class="max-w-4xl animate-pulse space-y-6">
+            <div class="h-3 w-40 bg-brand-dark-light rounded"></div>
+            <div class="h-14 w-96 max-w-full bg-brand-dark-light rounded"></div>
+            <div class="h-4 w-full max-w-2xl bg-brand-dark-light rounded"></div>
         </div>
     </section>
     } @else {
-    <!--   HEADER-->
+    <!-- HERO -->
     <section class="relative overflow-hidden">
-        <!-- Decorative glow -->
         <div class="absolute -top-48 -right-40 w-125 h-125 rounded-full bg-brand-gold/10 blur-3xl" aria-hidden="true">
         </div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-24 pb-20 lg:pt-32 lg:pb-24">
             <div class="max-w-4xl">
-                <!-- Eyebrow -->
                 <span class="text-brand-gold text-xs tracking-[0.35em] uppercase">
-                    Forma parte de nosotros
+                    Oportunidades profesionales
                 </span>
 
-                <!-- Title -->
                 <h1 class="font-brand-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight mt-6">
                     Trabaja
-
-                    <span class="text-brand-gold italic"> con nosotros </span>
+                    <span class="text-brand-gold italic">con nosotros</span>
                 </h1>
-
-                <!-- Accent -->
                 <div class="brand-line mt-8"></div>
-
-                <!-- Description -->
                 <p class="mt-8 text-brand-muted text-lg md:text-xl leading-relaxed max-w-2xl">
-                    Buscamos personas apasionadas por crear, innovar y formar parte de proyectos que dejan
-                    huella.
+                    Forma parte de un equipo que transforma ideas en soluciones digitales. Descubre nuestras
+                    oportunidades disponibles.
                 </p>
             </div>
         </div>
     </section>
 
-    <!--  JOB OFFERS  -->
+    <!-- OFERTAS -->
     <section class="border-t border-brand">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             @if (jobOffers().length === 0) {
             <!-- EMPTY STATE -->
             <div class="py-32 text-center">
-                <span class="text-brand-gold text-xs tracking-[0.3em] uppercase"> Oportunidades </span>
-
-                <h2 class="font-brand-serif text-3xl md:text-4xl mt-5 text-brand-text">
-                    No hay vacantes disponibles
-                </h2>
-
-                <p class="text-brand-subtle mt-4 max-w-md mx-auto leading-relaxed">
+                <span class="brand-number"> 00 </span>
+                <h2 class="font-brand-serif text-3xl md:text-4xl mt-5">No hay vacantes disponibles</h2>
+                <div class="brand-line mx-auto mt-6"></div>
+                <p class="text-brand-subtle mt-6 max-w-md mx-auto leading-relaxed">
                     En este momento no contamos con posiciones abiertas. Te invitamos a volver a
                     visitarnos próximamente.
                 </p>
@@ -64,7 +51,7 @@
             <!-- JOB LIST -->
             <div>
                 @for (job of jobOffers(); track job.id) {
-                <article class="group brand-row py-12 lg:py-16 transition-all duration-500 hover:px-4 lg:hover:px-6">
+                <article class="group brand-row py-12 lg:py-16">
                     <div class="grid lg:grid-cols-12 gap-8 lg:gap-12">
                         <!-- NUMBER -->
                         <div class="lg:col-span-1">
@@ -75,7 +62,6 @@
 
                         <!-- JOB INFORMATION -->
                         <div class="lg:col-span-7">
-                            <!-- TITLE -->
                             <h2
                                 class="font-brand-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-brand-text group-hover:text-brand-gold transition-colors duration-500">
                                 {{ job.title }}
@@ -103,7 +89,7 @@
                         </div>
 
                         <!-- MODALITY -->
-                        <div class="lg:col-span-3 lg:pt-2 flex lg:justify-end">
+                        <div class="lg:col-span-2 lg:pt-2">
                             <span
                                 class="inline-flex items-center h-fit px-4 py-2 text-[10px] tracking-[0.2em] uppercase border border-brand-strong text-brand-muted"
                                 [class]="modalityColor(job.modality)">
@@ -111,16 +97,17 @@
                             </span>
                         </div>
 
-                        <!-- ARROW -->
-                        <div class="lg:col-span-1 flex lg:justify-end lg:pt-1">
-                            <div
-                                class="w-10 h-10 rounded-full border border-brand-strong flex items-center justify-center group-hover:border-brand-gold group-hover:bg-brand-gold transition-all duration-500">
-                                <svg class="w-4 h-4 text-brand-text group-hover:text-brand-dark group-hover:translate-x-0.5 transition-all duration-500"
+                        <!-- ACTION -->
+                        <div class="lg:col-span-2 flex lg:justify-end lg:pt-1">
+                            <button type="button" (click)="openApplyModal(job)" class="brand-button group/apply">
+                                Postular
+
+                                <svg class="w-4 h-4 transition-transform duration-300 group-hover/apply:translate-x-1"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                         d="M5 12h14M13 6l6 6-6 6" />
                                 </svg>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </article>
@@ -130,23 +117,18 @@
         </div>
     </section>
 
-    <!--   CLOSING CTA -->
+    <!-- CLOSING CTA -->
     <section class="border-t border-brand">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 py-24 lg:py-32 text-center">
-            <!-- Accent -->
             <div class="w-px h-14 bg-brand-gold mx-auto mb-8" aria-hidden="true"></div>
 
-            <!-- Eyebrow -->
             <p class="text-brand-gold text-xs tracking-[0.3em] uppercase">Tu próximo paso</p>
 
-            <!-- Title -->
             <h2 class="font-brand-serif text-3xl md:text-4xl lg:text-5xl mt-5">
-                El talento también forma
-
+                Tu talento puede formar
                 <span class="text-brand-muted italic"> parte de nuestra historia. </span>
             </h2>
 
-            <!-- Description -->
             <p class="text-brand-subtle max-w-xl mx-auto mt-6 leading-relaxed">
                 Si compartes nuestra visión y no encuentras una posición que encaje contigo, mantente
                 atento a nuestras próximas oportunidades.
@@ -155,3 +137,8 @@
     </section>
     }
 </div>
+
+<!-- APPLY MODAL -->
+@if (selectedJob()) {
+<app-apply-modal [jobOfferId]="selectedJob()!.id" [jobTitle]="selectedJob()!.title" (closed)="closeApplyModal()" />
+}

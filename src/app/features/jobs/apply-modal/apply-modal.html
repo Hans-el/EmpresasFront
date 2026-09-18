@@ -1,0 +1,96 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center px-4 py-8 bg-brand-dark/80 backdrop-blur-sm">
+    <div class="w-full max-w-lg max-h-[90vh] overflow-y-auto bg-brand-dark-soft border border-brand shadow-brand-lg">
+        <!-- Encabezado -->
+        <div class="flex items-start justify-between gap-6 p-6 md:p-8 border-b border-brand">
+            <div>
+                <span class="text-brand-gold text-[10px] tracking-[0.3em] uppercase"> Postulación </span>
+
+                <h3 class="font-brand-serif text-2xl md:text-3xl text-brand-text mt-3 leading-tight">
+                    {{ jobTitle }}
+                </h3>
+
+                <div class="brand-line mt-5"></div>
+            </div>
+
+            <button type="button" (click)="close()"
+                class="shrink-0 w-9 h-9 border border-brand text-brand-muted hover:border-brand-gold hover:text-brand-gold transition-colors duration-300"
+                aria-label="Cerrar">
+                <svg class="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6l12 12M6 18L18 6" />
+                </svg>
+            </button>
+        </div>
+
+        @if (submitted()) {
+        <!-- Éxito -->
+        <div class="text-center px-6 py-14 md:px-8 md:py-16">
+            <div class="w-14 h-14 mx-auto border border-brand-gold rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m7 12 3.5 3.5L17 9" />
+                </svg>
+            </div>
+
+            <p class="font-brand-serif text-2xl text-brand-text mt-7">¡Postulación enviada!</p>
+
+            <p class="text-brand-muted text-sm mt-3 max-w-sm mx-auto leading-relaxed">
+                Hemos recibido tu información correctamente. Gracias por tu interés en formar parte de
+                Manabaware.
+            </p>
+
+            <button type="button" (click)="close()" class="brand-button mt-8">Cerrar</button>
+        </div>
+        } @else {
+        <!-- Formulario -->
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-6 md:p-8 space-y-8">
+            <!-- Nombre -->
+            <div>
+                <label for="applicant-name" class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
+                    Nombre completo
+                </label>
+
+                <input id="applicant-name" formControlName="applicantName" type="text" autocomplete="name"
+                    placeholder="Tu nombre completo" class="brand-input" />
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label for="applicant-email"
+                    class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
+                    Email
+                </label>
+
+                <input id="applicant-email" formControlName="applicantEmail" type="email" autocomplete="email"
+                    placeholder="tu@email.com" class="brand-input" />
+            </div>
+
+            <!-- CV -->
+            <div>
+                <label for="resume-url" class="block text-[10px] tracking-[0.25em] uppercase text-brand-muted mb-3">
+                    Enlace a tu CV
+                </label>
+
+                <p class="text-brand-subtle text-xs mb-3">Drive, LinkedIn u otra plataforma</p>
+
+                <input id="resume-url" formControlName="resumeUrl" type="url" autocomplete="url"
+                    placeholder="https://..." class="brand-input" />
+            </div>
+
+            <!-- Error -->
+            @if (error()) {
+            <div class="border border-danger/40 bg-danger/5 px-4 py-3">
+                <p class="text-danger text-sm">
+                    {{ error() }}
+                </p>
+            </div>
+            }
+
+            <!-- Acción -->
+            <button type="submit" [disabled]="saving()"
+                class="brand-button-solid w-full disabled:opacity-40 disabled:cursor-not-allowed">
+                {{ saving() ? 'Enviando...' : 'Enviar postulación' }}
+            </button>
+        </form>
+        }
+    </div>
+</div>

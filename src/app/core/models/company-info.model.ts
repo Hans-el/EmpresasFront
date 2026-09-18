@@ -6,4 +6,7 @@ export interface CompanyInfo {
   history: string;
   foundedYear: number;
   updatedAt: string;
+  address: string;
+  latitude: number;
+  longitude: number;
 }
